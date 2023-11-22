@@ -161,6 +161,7 @@ void CarlanetManager::connect(){
     string addr = protocol + "://" + host + ":" + std::to_string(port);
     EV << "Trying connecting to: " << addr << endl;
     socket.connect(addr);
+    connection = true;
 }
 
 void CarlanetManager::handleMessage(cMessage *msg)
@@ -238,6 +239,7 @@ json CarlanetManager::receiveFromCarla(double timeoutFactor){
     case SIM_STATUS_FINISHED_OK:
     case SIM_STATUS_FINISHED_ACCIDENT:
     case SIM_STATUS_FINISHED_TIME_LIMIT:
+        connection = false;
         endSimulation();
         break;
     case SIM_STATUS_ERROR:

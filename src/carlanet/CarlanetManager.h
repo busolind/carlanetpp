@@ -40,7 +40,7 @@ public:
 
     bool isConnected() const
     {
-        return true;
+        return connection;
     }
 
     simtime_t getCarlaInitialCarlaTimestamp() { return initial_timestamp; }
@@ -80,7 +80,7 @@ private:
         return receiveFromCarla(timeoutFactor).get<T>();
     }
 
-    bool connection;
+    bool connection = false;
     string protocol;
     string host;
     double simulationTimeStep;
